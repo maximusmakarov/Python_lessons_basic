@@ -13,10 +13,20 @@
 
 # Подсказка: воспользоваться методом .format()
 
+fruits = ['apple', 'banana', 'kiwi', 'watermelon']
+n = 1
+for fruit in fruits:
+    print(n, '.' + '{:>12}'.format(fruit))
+    n += 1
+
 
 # Задача-2:
 # Даны два произвольные списка.
 # Удалите из первого списка элементы, присутствующие во втором списке.
+
+fruits = ['apple', 'banana', 'kiwi', 'watermelon', 'pineapple']
+berries = ['watermelon', 'melon', 'strawberry', 'blackberry', ]
+
 
 
 # Задача-3:
