@@ -61,6 +61,15 @@ while True:
 # Подсказка:
 # для получения случайного числа используйте функцию randint() модуля random
 
+import random
+
+n = random.randint(1, 100)
+mas = []
+for i in range(n):
+    mas_digit = random.randint(-100, 100)
+    mas.append(mas_digit)
+print(n)
+print(mas)
 
 # Задача-4: Дан список, заполненный произвольными целыми числами.
 # Получите новый список, элементами которого будут:
