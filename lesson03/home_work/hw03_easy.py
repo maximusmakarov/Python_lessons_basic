@@ -5,7 +5,10 @@
 # Для решения задачи не используйте встроенные функции и функции из модуля math.
 
 def my_round(number, ndigits):
-    pass
+    # +0.41 задается для того чтобы округлить до 1 при числе 0.59
+    number = number * (10 ** ndigits) + 0.41
+    number = number // 1
+    return number / (10 ** ndigits)
 
 
 print(my_round(2.1234567, 5))
@@ -20,7 +23,11 @@ print(my_round(2.9999967, 5))
 # !!!P.S.: функция не должна НИЧЕГО print'ить
 
 def lucky_ticket(ticket_number):
-    pass
+    y = [int(n) for n in str(ticket_number)]
+    if sum(y[3:]) == sum(y[:3]):
+        return 'yes'
+    else:
+        return 'no'
 
 
 print(lucky_ticket(123006))
