@@ -6,9 +6,18 @@
 # квадратами элементов исходного списка
 # [1, 2, 4, 0] --> [1, 4, 16, 0]
 
+mas = [1, 2, 4, 0]
+new_mas = [i ** 2 for i in mas]
+print(new_mas)
+
 # Задание-2:
 # Даны два списка фруктов.
 # Получить список фруктов, присутствующих в обоих исходных списках.
+
+fruits = ['apple', 'bananas', 'kiwi', 'watermelon', 'melon']
+berrys = ['watermelon', 'raspberry', 'strawberry', 'blackberry', 'melon', 'blueberry', 'wild strawberry']
+melon_field = [list(set(fruits) & set(berrys))]
+print(melon_field)
 
 # Задание-3:
 # Дан список, заполненный произвольными числами.
@@ -16,3 +25,7 @@
 # + Элемент кратен 3
 # + Элемент положительный
 # + Элемент не кратен 4
+
+list_numbers = [-10, -5, 100, 50, 16, 38, 5, -67, 99, 33, 36, 64, -85, 0, 15, 30, 3]
+new_list = [i for i in list_numbers if i > 0 and i % 3 == 0 and i % 4 != 0]
+print(new_list)
