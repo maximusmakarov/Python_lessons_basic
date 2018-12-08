@@ -14,7 +14,7 @@ def fibonacci(n, m):
     return res
 
 
-print(fibonacci(10, 30))
+print(fibonacci(5, 50))
 
 
 # Задача-2:
