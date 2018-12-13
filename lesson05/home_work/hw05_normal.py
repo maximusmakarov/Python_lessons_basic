@@ -13,3 +13,59 @@
 # Для решения данной задачи используйте алгоритмы из задания easy,
 # оформленные в виде соответствующих функций,
 # и импортированные в данный файл из easy.py
+
+import os
+
+
+def main():
+
+    answer = ''
+
+    while answer != 'q':
+        answer = input("Желаете что-нибудь сделать? (y/n/q)")
+        if answer == 'y':
+
+            print(" [1] - Перейти в папку")
+            print(" [2] - Просмотреть содержимое текущей папки")
+            print(" [3] - Удалить директорию")
+            print(" [4] - Создать директорию")
+
+            do = int(input("Укажите номер действия: "))
+
+            if do == 1:
+                print("=Переход в указанную директорию=")
+                dirname = input("Укажите имя директории:")
+                os.chdir(dirname)
+                print("Перешел в директорию  " + dirname)
+
+            elif do == 2:
+                print("=Просмотр содержимого текущей папки=")
+                print(os.listdir())
+
+            elif do == 3:
+                print("=Удаление директории=")
+                dirname = input("Укажите имя директории:")
+                os.rmdir(dirname)
+                print("Директория " + dirname + " удалена")
+
+            elif do == 4:
+                print("=Создание директории=")
+                dirname = input("Укажите имя директории:")
+                os.mkdir(dirname)
+                print("Директория " + dirname + " создана")
+
+            else:
+                pass
+
+        elif answer == 'q':
+            print("До свидания!")
+
+        elif answer == 'n':
+            print("Не хотите, как хотите")
+            break
+        else:
+            print("Неизвестный ответ")
+
+
+if __name__ == "__main__":
+    main()
