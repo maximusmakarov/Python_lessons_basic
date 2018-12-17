@@ -50,14 +50,10 @@ print(f'Высота треугольника h = {t._height()}', '\n')
 class Trapezium:
     def __init__(self, x1, y1, x2, y2, x3, y3, x4, y4):
         self.x1, self.y1, self.x2, self.y2, self.x3, self.y3, self.x4, self.y4 = x1, y1, x2, y2, x3, y3, x4, y4
-
-        self.c = math.sqrt(((self.x2 - self.x1) ** 2) + ((self.y2 - self.y1) ** 2))
-        self.d = math.sqrt(((self.x4 - self.x3) ** 2) + ((self.y4 - self.y3) ** 2))
-        self.a = math.sqrt(((self.x3 - self.x2) ** 2) + ((self.y3 - self.y2) ** 2))
-        self.b = math.sqrt(((self.x4 - self.x1) ** 2) + ((self.y4 - self.y1) ** 2))
-        self.perimeter = self.a + self.b + self.c + self.d
-        self.area = ((self.a + self.b) / 2) * (math.sqrt((self.c ** 2) - ((((self.b - self.a) ** 2) + (self.c ** 2) -
-                                                                           (self.d ** 2)) / (2 * (self.b - self.a)))))
+        self.c = math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2))
+        self.d = math.sqrt(((x4 - x3) ** 2) + ((y4 - y3) ** 2))
+        self.a = math.sqrt(((x3 - x2) ** 2) + ((y3 - y2) ** 2))
+        self.b = math.sqrt(((x4 - x1) ** 2) + ((y4 - y1) ** 2))
 
     def check_trapezium(self):
         if self.c == self.d:
@@ -65,16 +61,19 @@ class Trapezium:
         else:
             print("Трапеция неравнобокая")
 
-    def perimeter(self):        
+    def _perimeter(self) -> object:
+        self.perimeter = self.a + self.b + self.c + self.d
         return self.perimeter
 
-    def area(self):        
+    def _area(self):
+        self.area = ((self.a + self.b) / 2) * (math.sqrt((self.c ** 2) - ((((self.b - self.a) ** 2) + (self.c ** 2) -
+                                                                           (self.d ** 2)) / (2 * (self.b - self.a)))))
         return self.area
 
 
 tp = Trapezium(0, 0, 2, 2, 4, 4, 6, 6)
 
 tp.check_trapezium()
-print(f'Периметр трапеции равен P = {tp.perimeter}')
+print(f'Периметр трапеции равен P = {tp._perimeter()}')
 print(f'Длина строны a = {tp.a}, b = {tp.b}, c = {tp.c}, d = {tp.d}')
-print(f'Площадь: S = {tp.area}')
+print(f'Площадь: S = {tp._area()}')
