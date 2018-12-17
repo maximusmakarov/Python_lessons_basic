@@ -13,33 +13,33 @@ class Triangle:
         self.a = math.sqrt(abs(((x1 - x2) ** 2 + (y1 - y2) ** 2)))
         self.b = math.sqrt(abs(((x2 - x3) ** 2 + (y2 - y3) ** 2)))
         self.c = math.sqrt(abs(((x3 - x1) ** 2 + (y3 - y1) ** 2)))
-        self.perimeter = self.a + self.b + self.c
-        p = self.perimeter / 2
-        self.area = math.sqrt(p * (p - self.a) * (p - self.b) * (p - self.c))
-        self.height = 2 * self.area / self.a
 
     # периметр треугольника
 
-    def perimeter(self):
+    def _perimeter(self):
+        self.perimeter = self.a + self.b + self.c
         return self.perimeter
 
     # площадь треугольника
 
-    def area(self):
+    def _area(self):
+        p = self.perimeter / 2
+        self.area = math.sqrt(p * (p - self.a) * (p - self.b) * (p - self.c))
         return self.area
 
     # высота треугольника
 
-    def height(self):
+    def _height(self):
+        self.height = 2 * self.area / self.a
         return self.height
 
 
 t = Triangle(0, 2, 3, 4, 5, -10)
 
 print(f'\nДлина строны a = {t.a}, b = {t.b}, c = {t.c}')
-print(f'Периметр треугольника P = {t.perimeter}')
-print(f'Площадь треугольника S = {t.area}')
-print(f'Высота треугольника h = {t.height}', '\n')
+print(f'Периметр треугольника P = {t._perimeter()}')
+print(f'Площадь треугольника S = {t._area()}')
+print(f'Высота треугольника h = {t._height()}', '\n')
 
 
 # Задача-2: Написать Класс "Равнобочная трапеция", заданной координатами 4-х точек.
