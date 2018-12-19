@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+import numpy.random as rand
 
 """
 == Лото ==
@@ -32,7 +32,7 @@
 Если игрок выбрал "продолжить":
 	Если цифра есть на карточке - игрок проигрывает и игра завершается.
 	Если цифры на карточке нет - игра продолжается.
-	
+
 Побеждает тот, кто первый закроет все числа на своей карточке.
 
 Пример одного хода:
@@ -57,3 +57,92 @@
 модуль random: http://docs.python.org/3/library/random.html
 
 """
+
+
+class Card:
+    def __init__(self, name):
+        self.bag = [x for x in range(1, 91)]
+        self.card = [__class__.generator_string(self.bag), __class__.generator_string(self.bag),
+                     __class__.generator_string(self.bag)]
+        self.name = name
+        self.count_keg = 15
+
+    @staticmethod
+    def generator_string(bag):
+        string = ['' for _ in range(9)]
+        for x in range(8, 3, -1):
+            digit = rand.randint(0, x)
+            while string[digit] != '':
+                digit += 1
+            string[digit] = bag.pop(rand.randint(0, len(bag) - 1))
+        return string
+
+    def __str__(self):
+        rez = '{:-^26}\n'.format(self.name)
+        for x in range(3):
+            rez += '{:>2} {:>2} {:>2} {:>2} {:>2} {:>2} {:>2} {:>2} {:>2}'.format(*self.card[x]) + '\n'
+        return rez + '--------------------------\n'
+
+
+computer = Card(' Карточка компьютера ')
+player = Card(' Карточка игрока ')
+bag = [x for x in range(1, 91)]
+while True:
+    if len(bag) < 1:
+        print(f'Бочонки в мешке закончились. Результат:\n'
+              'у компьютера осталось {computer.count_barrel} числа/чисел,\n'
+              'у игрока осталось {player.count_barrel} числа/чисел.')
+        break
+
+    keg = bag.pop(rand.randint(0, len(bag) - 1))
+    print(f'\nНовый бочонок: {keg} (осталось {len(bag)})\n')
+    print(player, '\n', computer)
+    reply = input('Зачеркнуть цифру? (y/n/q)').lower()
+
+    while len(reply) == 0 or reply not in 'ynq':
+        print('\n\n Ответ не распознан!\n')
+        print(f'Новый бочонок: {keg} (осталось {len(bag)})')
+        print(player, '\n', computer)
+        reply = input('Зачеркнуть цифру? (y/n/q)').lower()
+
+    if reply == 'q':
+        print('Вы вышли из игры. Вы так и не выиграли.')
+        break
+    elif reply == 'y':
+        test = False
+        for x in range(3):
+            if keg in player.card[x]:
+                test = True
+                player.card[x][player.card[x].index(keg)] = '-'
+                player.count_keg -= 1
+            if keg in computer.card[x]:
+                computer.card[x][computer.card[x].index(keg)] = '-'
+                computer.count_keg -= 1
+        if test:
+            if player.count_keg < 1:
+                print('Вы Выиграли!')
+                break
+            elif computer.count_keg < 1:
+                print('Компьютер Выиграл!')
+                break
+        else:
+            print('Вы проиграли! Такого числа нет на Вашей карточке!')
+            break
+    elif reply == 'n':
+        test = False  # Есть ли такая цифра на карточке игрока?
+        for x in range(3):
+            if keg in player.card[x]:
+                print('Вы проиграли! Такое число есть на Вашей карточке!')
+                test = True
+                break
+            if keg in computer.card[x]:
+                computer.card[x][computer.card[x].index(keg)] = '-'
+                computer.count_keg -= 1
+        if test:
+            break
+        if player.count_keg < 1:
+            print('Вы Выиграли!')
+            break
+        elif computer.count_keg < 1:
+            print('Компьютер Выиграл!')
+            break
